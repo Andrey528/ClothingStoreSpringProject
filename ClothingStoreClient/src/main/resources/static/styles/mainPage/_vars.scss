@@ -1,0 +1,34 @@
+$colorSelectSite: #f16d7f;
+$colorForHeader4: #fff;
+$simpleTextColor: #9F9F9F;
+$filterLinksColor: #6f6e6e;
+$borderFilterColor: #ebebeb;
+$subscribeButtonColor: #E1E1E1;
+$headerIconsColor: #e8e8e8;
+$breadcrumbsLinkColor: #636363;
+$titleAndBlockDarkColor: #222;
+$blackColor: #000;
+$colorForPageLinks: #c4c4c4;
+$productContentBackground: #f8f8f8;
+$productTextColor: #5d5d5d;
+$mainBlockBackground: #F1E4E6;
+$widthSite: 1140px;
+$gapGrid: 30px;
+$widthBurgerMenu: 232px;
+$halfOfTheSite: calc($widthSite / 2);
+$thirdPartOfSite: calc(($widthSite - $gapGrid * 2) / 3);
+
+@media (min-width: 768px) and (max-width: 1600px) {
+    $widthSite: 736px;
+    $gapGrid: 30px;
+    $halfOfTheSite: calc($widthSite / 2);
+    $thirdPartOfSite: calc(($widthSite - $gapGrid * 2) / 3);
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+    $widthSite: 343px;
+    $gapGrid: 30px;
+    $halfOfTheSite: calc($widthSite / 2);
+    $thirdPartOfSite: calc(($widthSite - $gapGrid * 2) / 3);
+}
+

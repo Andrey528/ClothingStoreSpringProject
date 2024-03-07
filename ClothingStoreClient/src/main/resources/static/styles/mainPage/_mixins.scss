@@ -1,0 +1,14 @@
+@mixin customFlex($flexDirection, $justifyContent, $alignItems, $flexWrap) {
+    display: flex;
+    flex-direction: $flexDirection;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+    flex-wrap: $flexWrap;
+}
+
+@mixin customText($color, $fontSize, $fontWeight, $lineHeight) {
+    color: $color;
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    line-height: $lineHeight;
+}

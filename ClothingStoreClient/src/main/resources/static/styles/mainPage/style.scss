@@ -1,0 +1,633 @@
+@import 'vars';
+@import 'mixins';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+}
+
+summary {
+    display: block;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+.center {
+    padding-left: calc(50% - $widthSite / 2);
+    padding-right: calc(50% - $widthSite / 2);
+}
+
+.grid {
+    display: grid;
+}
+
+.header-h1 {
+    @include customText($titleAndBlockDarkColor, 3.42rem, 900, auto);
+}
+
+.header-h2 {
+    @include customText($titleAndBlockDarkColor, 2.28rem, 700, auto);
+}
+
+.header-h3 {
+    @include customText($colorSelectSite, 24px, 700, auto);
+}
+
+.header-h4 {
+    @include customText($colorForHeader4, 16px, 400, auto);
+}
+
+.header-h5 {
+    @include customText($titleAndBlockDarkColor, 30px, 400, auto);
+}
+
+.text {
+    @include customText($simpleTextColor, 14px, 400, auto);
+}
+
+.wrapper {
+    overflow-x: hidden;
+    height: 100%;
+    @include customFlex(column, auto, auto, auto);
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+// header block
+.header {
+    background-color: $titleAndBlockDarkColor;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @include customFlex(row, space-between, center, nowrap);
+    position: relative;
+}
+
+.logo-search {
+    display: flex;
+    gap: 40px;
+
+    &>* {
+        color: $headerIconsColor;
+        font-size: 26px;
+        margin: auto;
+        -webkit-transition: all 1s ease;
+        transition: all 1s ease; 
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+.nav {
+    display: flex;
+    gap: 32px;
+
+    & i {
+        color: $headerIconsColor;
+        font-size: 26px;
+        margin: auto;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease; 
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+#burger {
+    position: absolute;
+    left: -999999px;
+    visibility: hidden;
+
+    &:checked ~ .burger__nav {
+        right: 0;
+    }    
+}
+
+.burger__nav {
+    background: $colorForHeader4;
+    box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
+    width: $widthBurgerMenu;
+    padding: 32px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 85px;
+    right: -$widthBurgerMenu;
+    transition: right .3s;
+}
+
+.burger-box {
+    position: relative;
+
+    &__close-btn {
+        position: absolute;
+        top: -24px;
+        right: -24px;
+    }
+
+    &__title {
+        @include customText($blackColor, 14px, 700, auto);
+        margin-bottom: 24px;
+    }
+
+    &__item {
+        margin-bottom: 16px;
+    }
+
+    &__item-summary {
+        @include customText($colorSelectSite, 14px, 700, auto);
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease; 
+
+        &:hover {
+            text-shadow: 1px 1px 1px #000;
+        }
+    }
+
+    &__link-box {
+        @include customFlex(column, auto, auto, auto);
+        gap: 11px;
+        padding: 12px 22px;
+    }
+
+    &__item-link {
+        @include customText($filterLinksColor, 14px, 400, auto);
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+// main block
+.main-block {
+    grid-template-columns: repeat(2, 50%);
+
+    &__left-block {
+        @include customFlex(row, center, center, nowrap);
+    }
+
+    &__right-block {
+        padding-left: 64px;
+        background-color: $mainBlockBackground;
+
+        @include customFlex(row, flex-start, center, nowrap);
+        gap: 16px;
+    }
+}
+
+.pink-rect {
+    width: 12px;
+    height: 92px;
+    background-color: $colorSelectSite;
+}
+
+.header-h2>span {
+    color: $colorSelectSite;
+}
+
+// categories block
+.categores {
+    padding-top: 65px;
+    padding-bottom: 96px;
+    grid-template-columns: repeat(3, 360px);
+    gap: 30px;
+
+    &__item {
+        height: 260px;
+        background-size: cover;
+        background-position: center;
+        @include customFlex(column, center, center, nowrap);
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease; 
+
+        &:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+    }
+}
+
+.item {
+    &__text {
+        text-align: center;
+    }
+
+    &_1{
+        background: no-repeat url('../../img/women.png');
+    }
+
+    &_2 {
+        background: no-repeat url('../../img/men.png');
+    }
+    
+    &_3 {
+        background: no-repeat url('../../img/kids.png');
+    }
+    
+    &_4 {
+        background: no-repeat url('../../img/accesories.png');
+        grid-column: span 3;
+        height: 180px;
+    }
+}
+
+// product block
+.product-box {
+    padding-bottom: 96px;
+
+    &__content {
+        @include customFlex(row, center, center, wrap);
+        gap: $gapGrid;
+        padding-bottom: 48px;
+    }
+    
+    &__title {
+        text-align: center;
+        margin-bottom: 48px;
+    }
+
+    &__action-block {
+        text-align: center;
+    }
+}
+
+.product {
+    width: $thirdPartOfSite;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &:hover {
+        box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.21);
+
+        & .product__img {
+            filter: brightness(30%);
+        }
+
+        & .product__add-box {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    &__img-box {
+        position: relative;
+        width: 100%;
+    }
+    
+    &__img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &__add-box {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        display: none;
+        pointer-events: none;
+
+        & i {
+            color: $colorForHeader4;
+        }
+    }
+
+    &__add {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 1rem 2rem;
+        border: 1px solid $colorForHeader4;
+        pointer-events: all;
+
+        &:hover {
+            box-shadow: 0px 0px 8px 0px $colorForHeader4;
+        }
+    }
+
+    &__add-text {
+        @include customText($colorForHeader4, 14px, 400, auto);
+    }
+
+    &__content {
+        background-color: $productContentBackground;
+        padding: 24px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__name {
+        @include customText($blackColor, 13px, 400, 16px);
+    }
+
+    &__text {
+        @include customText($productTextColor, 14px, 300, 17px);
+    }
+
+    &__price {
+        @include customText($colorSelectSite, 16px, 400, 19px);
+
+    } 
+}
+
+.browse-all-product {
+    @include customText($colorSelectSite, 16px, 400, auto);
+    border: 1px solid $colorSelectSite;
+    padding: 1rem 2rem;
+
+    &:hover {
+        color: $colorForHeader4;
+        background-color: $colorSelectSite;
+    }
+}
+
+// feature block
+.feature-container {
+    background-color: $titleAndBlockDarkColor;
+}
+
+.features {
+    @include customFlex(row, center, center, nowrap);
+    gap: $gapGrid;
+    padding-top: 104px;
+    padding-bottom: 104px;
+}
+
+.feature {
+    text-align: center;
+
+    & img {
+        margin-bottom: 32px;
+    }
+
+    &>h4 {
+        font-size: 20px;
+        margin-bottom: 16px;            
+    }
+}
+
+// subscribe block
+.subscribe {
+    background: url(../../img/photo-subscribe.png) no-repeat center center fixed;
+    background-size: cover;
+    @include customFlex(row, space-around, center, nowrap);
+    padding-top: 96px;
+    padding-bottom: 120px;
+
+    &__info {
+        text-align: center;
+        float: left;
+        width: $halfOfTheSite;
+
+        &>p {
+            margin-top: 32px;
+            @include customText($titleAndBlockDarkColor, 20px, 400, auto);
+
+            & span {
+                font-style: italic;
+            }
+        }
+
+    }
+
+    &__action-container {
+        float: right;
+        width: $halfOfTheSite;
+        text-align: center;
+
+        &>h3 {
+            @include customText($titleAndBlockDarkColor, 24px, 700, 40px);
+        }
+
+        &>h4 {
+            @include customText($titleAndBlockDarkColor, 18px, 400, 40px);
+            margin-bottom: 32px;
+        }
+    }
+
+    &__action-field {
+        display: flex;
+    }
+
+    &__input {
+        height: 50px;
+        width: calc(100% - 100px);
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border: 1px solid $subscribeButtonColor;
+        background-color: $subscribeButtonColor;
+        padding: 0 24px;
+        box-sizing: border-box;
+    }
+
+    &__button {
+        height: 50px;
+        width: 100px;
+        line-height: 50px;
+        background-color: $colorSelectSite;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        @include customText($colorForHeader4, 14px, 400, auto);
+        box-sizing: border-box;
+
+        &:hover {
+            border: 1px solid $colorSelectSite;
+            color: $colorSelectSite;
+            background-color: $colorForHeader4;
+        }
+    }
+}
+
+// footer block
+.footer {
+    background-color: $titleAndBlockDarkColor;
+    @include customFlex(row, space-between, center, nowrap);
+    padding-top: 24px;
+    padding-bottom: 24px;
+    flex: 0 0 auto;
+}
+
+.copyright>p {
+    width: 332px;
+    color: #FBFBFB;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.social-icons {
+    @include customFlex(row, center, center, nowrap);
+    gap: 8px;
+}
+
+.social-icon {
+    height: 32px;
+    width: 32px;
+    background-color: $colorForHeader4;
+    @include customFlex(row, center, center, nowrap);
+
+    &:hover {
+        background-color: $colorSelectSite;
+        color: $colorForHeader4;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1400px) {
+    .center {
+        padding-left: calc(50% - 370px);
+        padding-right: calc(50% - 370px);
+    }
+
+    .header-h1 {
+        font-size: 44px;
+    }
+
+    .header-h2 {
+        font-size: 24px;
+    }
+
+    .first-block-left>img {
+        height: 368px;
+    }
+
+    .categores {
+        padding-top: 65px;
+        padding-bottom: 96px;
+        grid-template-columns: repeat(3, 230px);
+        justify-content: space-around;
+    }
+
+    .featured-items-content {
+        grid-template-columns: repeat(2, 360px);
+        margin-bottom: 48px;
+        justify-content: space-around;
+    }
+
+    .feature-container .features {
+        flex-direction: column;
+        gap: 48px;
+    }
+
+    .subscribe {
+        flex-direction: column;
+        padding-bottom: 140px;
+        padding-top: 64px;
+    }
+
+    .subscribe-info {
+        margin-bottom: 48px;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+
+    .only-desktop {
+        display: none;
+    }
+
+    .header-h1 {
+        font-size: 38px;
+    }
+
+    .header-h2 {
+        font-size: 20px;
+    }
+
+    .center {
+        padding-left: calc(50% - 343px / 2);
+        padding-right: calc(50% - 343px / 2);
+    }
+
+    // main block
+    .main-block {
+        grid-template-columns: repeat(1, 100vw);
+        height: 363px;
+    }
+
+    // categories block
+    .categores {
+        justify-content: center;
+        grid-template-columns: repeat(1, 1fr);
+
+        &__item {
+            background-size: cover;
+        }
+    }
+
+    .item {
+        &_4 {
+            grid-column: span 1;
+        }
+    }
+
+    // feature block
+    .features {
+        flex-direction: column;
+        gap: 48px;
+    }
+
+    // subscribe block
+    .subscribe {
+        flex-direction: column;
+        padding-bottom: 110px;
+        padding-top: 64px;
+
+        &__info {
+            margin-bottom: 60px;
+            width: 97vw;
+
+            &>p {
+                font-size: 18px;
+            }
+        }
+
+        &__action-container>h4 {
+            font-size: 14px;
+            line-height: 14px;
+        }    
+
+        &__action-field {
+            justify-content: center;
+        }
+
+        &__input {
+            width: 64vw;
+        }
+
+        &__button {
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+    }
+
+    // footer block
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .copyright {
+        margin-top: 40px;
+        text-align: center;
+    }
+}
