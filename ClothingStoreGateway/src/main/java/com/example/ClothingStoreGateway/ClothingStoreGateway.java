@@ -12,4 +12,13 @@ public class ClothingStoreGateway {
 	public static void main(String[] args) {
 		SpringApplication.run(ClothingStoreGateway.class, args);
 	}
+
+	@Bean
+	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+		return builder.routes()
+				.route("resource-server", r -> r.path("/product/**")
+						.uri("http://localhost:8081/"))
+				.route("payment-server", r -> r.path("/**")
+						.uri("http://localhost:8082/")).build();
+	}
 }
