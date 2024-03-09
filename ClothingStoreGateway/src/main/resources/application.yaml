@@ -15,3 +15,9 @@ spring:
           lower-case-service-id: true
   config:
     import: configserver:http://localhost:8084
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: ${EUREKA_URI:http://localhost:8085/eureka}
+#  instance:
+#    preferIpAddress: true
