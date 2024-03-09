@@ -1,15 +1,21 @@
 server:
   port: 8081
 spring:
+  application:
+    name: resource-server
+
   datasource:
     url: jdbc:mysql://localhost:3306/clothingShop?createDatabaseIfNotExist=TRUE
     username: "root"
-    password: "0d5u8n8g"
+    password: "123"
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  profiles:
+    active: eclient
 
   config:
     import: configserver:http://localhost:8084

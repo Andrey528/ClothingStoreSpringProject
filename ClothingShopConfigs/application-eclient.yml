@@ -4,3 +4,9 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8085/eureka}
   instance:
     preferIpAddress: true
+
+api:
+  resource:
+    basicUri: http://localhost:8081
+  payment:
+    basicUri: http://localhost:8082

@@ -2,10 +2,13 @@ server:
   port: 8082
 
 spring:
+  application:
+    name: payment-server
+
   datasource:
     url: jdbc:mysql://localhost:3306/walletDb?createDatabaseIfNotExist=TRUE
     username: "root"
-    password: "0d5u8n8g"
+    password: "123"
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -13,7 +16,7 @@ spring:
     show-sql: true
 
   profiles:
-    active: eurekaclient
+    active: eclient
 
   config:
     import: configserver:http://localhost:8084

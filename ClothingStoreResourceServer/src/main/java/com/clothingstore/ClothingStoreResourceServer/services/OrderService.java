@@ -64,6 +64,7 @@ public class OrderService {
 
     // Метод старта процесса оплаты
     public void startOrderPayment(Order order) {
+        System.out.println(paymentApi);
         // Резервируем продукты
         order.getProductInOrderDetails().forEach(productInOrderDetails ->
                 productService.productReservation(

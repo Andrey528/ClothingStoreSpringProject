@@ -5,7 +5,7 @@ spring:
   application:
     name: api-gateway
   profiles:
-    active: eurekaclient
+    active: eclient
 
   cloud:
     gateway:
