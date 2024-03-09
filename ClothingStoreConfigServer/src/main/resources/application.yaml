@@ -9,6 +9,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/Andrey528/ClothingStoreSpringProject.git
+          uri: git@github.com:Andrey528/ClothingStoreSpringProjectConfigs.git
           basedir: file:///tmp/ClothingStore
           default-label: main
