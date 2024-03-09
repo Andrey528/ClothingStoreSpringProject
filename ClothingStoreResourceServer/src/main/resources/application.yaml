@@ -11,6 +11,5 @@ spring:
       ddl-auto: update
     show-sql: true
 
-api:
-  payment:
-    basicUri: http://localhost:8082
+  config:
+    import: configserver:http://localhost:8084

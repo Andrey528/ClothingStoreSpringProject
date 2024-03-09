@@ -4,13 +4,14 @@ server:
 spring:
   application:
     name: api-gateway
+  profiles:
+    active: eurekaclient
 
-routes:
-  - id: resource-server
-    uri: http://localhost:8081/
-    predicates:
-      - Path=/product/**
-  - id: payment-server
-    uri: http://localhost:8082/
-    predicates:
-      - Path=/**
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+  config:
+    import: configserver:http://localhost:8084
