@@ -5,6 +5,16 @@ eureka:
   instance:
     preferIpAddress: true
 
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          payment:
+            url: http://localhost:8082
+          storage:
+            url: http://localhost:8081
+
 api:
   resource:
     basicUri: http://localhost:8081

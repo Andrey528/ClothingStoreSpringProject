@@ -1,12 +1,19 @@
 package com.clothingstore.ClothingStoreResourceServer.models.api;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-@Data
+import com.clothingstore.ClothingStoreResourceServer.dtos.PaymentInvoice;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 @Component
-@ConfigurationProperties("api.payment")
-public class PaymentApi {
-    private String basicUri;
+@FeignClient(name = "payment")
+public interface PaymentApi {
+    @PostMapping()
+    ResponseEntity<?> startPayingProcess(@RequestBody PaymentInvoice paymentInvoice);
+
+    @PostMapping("/rollback")
+    void rollbackPayingProcess(@RequestBody PaymentInvoice paymentInvoice);
 }

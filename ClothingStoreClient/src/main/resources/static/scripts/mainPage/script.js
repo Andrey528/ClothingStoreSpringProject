@@ -30,12 +30,21 @@ const postData = async (url = '', data = {}) => {
   }
 };
 
+// Функция очистки корзины от товаров
+const clearCart = () => {
+  while (cartProductsContent.firstChild) {
+    cartProductsContent.removeChild(cartProductsContent.firstChild);
+  }
+};
+
+// Метод сокрытия или отображения корзины на странице в зависимости от наличия продуктов в корзине
 const cartContentController = () => {
   if (cartProductsContent.children.length == 0)
     cartContainer.style.display = 'none';
   else cartContainer.style.display = 'grid';
 };
 
+// Наблюдатель за дочерними элементами (продуктами) в корзине
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     if (mutation.type === 'childList') {
@@ -51,6 +60,7 @@ observer.observe(cartProductsContent, {
   subtree: true,
 });
 
+// Метод формирования и вызова post запроса с продуктами из корзины по нажатию кнопки buy
 document.querySelector('.buy-btn').addEventListener('click', () => {
   const cartProducts = cartProductsContent.querySelectorAll('.cartProduct');
   let products = [];
@@ -71,16 +81,25 @@ document.querySelector('.buy-btn').addEventListener('click', () => {
 
   postData('http://localhost:8081/order', jsonData)
     .then((result) => {
-      if (result) alert('Спасибо за заказ! Мы скоро свяжемся с вами!');
+      if (result) {
+        alert('Спасибо за заказ! Мы скоро свяжемся с вами!');
+        products.forEach(productInCart => {
+            targetProduct = dataProducts.find(
+                (product) => product.id === productInCart.id
+            );
+            targetProduct.storeAmount -= productInCart.amount;
+            targetProduct.reservedQuantity = 0;
+        });
+        clearCart();
+      }
       else alert('Нужно исправить форму заказа!');
     })
     .catch((error) => console.log(error));
 });
 
+// Метод очистки содержимого корзины по нажатию кнопки clear
 document.querySelector('.clear-cart-btn').addEventListener('click', () => {
-  while (cartProductsContent.firstChild) {
-    cartProductsContent.removeChild(cartProductsContent.firstChild);
-  }
+    clearCart();
 });
 
 const updateQuantityOfProduct = (productId) => {

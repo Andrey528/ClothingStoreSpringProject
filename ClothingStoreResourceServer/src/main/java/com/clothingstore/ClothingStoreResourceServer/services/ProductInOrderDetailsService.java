@@ -12,8 +12,12 @@ public class ProductInOrderDetailsService {
     @Autowired
     private final ProductInOrderDetailsRepository productInOrderDetailsRepository;
 
+    /**
+     * Метод сохранения деталей заказа в БД
+     * @param productInOrderDetails хранит id продукта и его количество
+     * @return
+     */
     public ProductInOrderDetails saveProductInOrderDetails(ProductInOrderDetails productInOrderDetails) {
         return productInOrderDetailsRepository.save(productInOrderDetails);
     }
-
 }
