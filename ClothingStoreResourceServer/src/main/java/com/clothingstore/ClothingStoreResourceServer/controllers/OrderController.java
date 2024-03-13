@@ -6,6 +6,8 @@ import com.clothingstore.ClothingStoreResourceServer.models.ProductInOrderDetail
 import com.clothingstore.ClothingStoreResourceServer.services.OrderService;
 import com.clothingstore.ClothingStoreResourceServer.services.ProductInOrderDetailsService;
 import com.clothingstore.ClothingStoreResourceServer.services.ProductService;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.Map;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/order")
+@Timed(value = "create_order_time", description = "Time taken to create an order")
 @CrossOrigin(origins = "http://localhost:8080")
 public class OrderController {
     @Autowired
@@ -28,6 +31,7 @@ public class OrderController {
     @Autowired
     private final ProductInOrderDetailsService productInOrderDetailsService;
 
+    @Counted(value = "createOrder.count", description = "Counts how many orders are created")
     @PostMapping
     public ResponseEntity<Void> createOrder(@RequestBody Map<String, Object> requestData) {
         // Парсим json с формы клиента и получаем: map с ключом = id продукта и значением = количеству заказываемого продукта, username пользователя

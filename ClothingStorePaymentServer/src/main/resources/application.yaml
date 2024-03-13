@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/walletDb?createDatabaseIfNotExist=TRUE
     username: "root"
-    password: "123"
+    password: "0d5u8n8g"
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -20,3 +20,9 @@ spring:
 
   config:
     import: configserver:http://localhost:8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics,prometheus

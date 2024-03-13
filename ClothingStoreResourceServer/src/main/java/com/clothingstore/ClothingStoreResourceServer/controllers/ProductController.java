@@ -2,6 +2,7 @@ package com.clothingstore.ClothingStoreResourceServer.controllers;
 
 import com.clothingstore.ClothingStoreResourceServer.models.Product;
 import com.clothingstore.ClothingStoreResourceServer.services.ProductService;
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -24,16 +25,19 @@ public class ProductController {
     @Autowired
     private final ProductService productService;
 
+    @Timed(value = "getAllProducts.time", description = "Time taken to get all products")
     @GetMapping("/getAllProducts")
     public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity.ok().body(productService.getAllProducts());
     }
 
+    @Timed(value = "getProduct.time", description = "Time taken to get a product by id")
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable("id") Long id){
         return ResponseEntity.ok().body(productService.getProductById(id));
     }
 
+    @Timed(value = "getProductImg.time", description = "Time taken to get product image by id")
     @GetMapping("/{id}/productimg")
     public ResponseEntity<byte[]> getProductImg(@PathVariable("id") Long id) {
         String fileName = "product" + id + ".jpg";
