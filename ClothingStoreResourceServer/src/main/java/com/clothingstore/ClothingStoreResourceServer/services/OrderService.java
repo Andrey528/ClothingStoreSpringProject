@@ -39,7 +39,7 @@ public class OrderService {
     private final PaymentApi paymentApi;
 
     /**
-     *
+     * Метод сохранения заказа
      * @param order заказ от клиента
      * @return сохраненный объект из БД
      */
@@ -131,7 +131,7 @@ public class OrderService {
      */
     public void startOrderPayment(Order order) {
         // Резервируем продукты
-        if(reserveProductsFromOrder(order.getProductInOrderDetails()) == true)
+        if(reserveProductsFromOrder(order.getProductInOrderDetails()))
         {
             // Попробуй оплатить заказ
             try {

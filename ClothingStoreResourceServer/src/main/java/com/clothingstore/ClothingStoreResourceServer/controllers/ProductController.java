@@ -1,6 +1,7 @@
 package com.clothingstore.ClothingStoreResourceServer.controllers;
 
 import com.clothingstore.ClothingStoreResourceServer.models.Product;
+import com.clothingstore.ClothingStoreResourceServer.services.FacadeService;
 import com.clothingstore.ClothingStoreResourceServer.services.ProductService;
 import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
@@ -22,19 +23,20 @@ import java.io.InputStream;
 @RequestMapping("/product")
 @CrossOrigin(origins = "http://localhost:8080")
 public class ProductController {
+
     @Autowired
-    private final ProductService productService;
+    private final FacadeService facadeService;
 
     @Timed(value = "getAllProducts.time", description = "Time taken to get all products")
     @GetMapping("/getAllProducts")
     public ResponseEntity<List<Product>> getAllProducts() {
-        return ResponseEntity.ok().body(productService.getAllProducts());
+        return ResponseEntity.ok().body(facadeService.getAllProducts());
     }
 
     @Timed(value = "getProduct.time", description = "Time taken to get a product by id")
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable("id") Long id){
-        return ResponseEntity.ok().body(productService.getProductById(id));
+        return ResponseEntity.ok().body(facadeService.getProductById(id));
     }
 
     @Timed(value = "getProductImg.time", description = "Time taken to get product image by id")

@@ -17,6 +17,10 @@ public class ProductService {
     @Autowired
     private final ProductRepository productRepository;
 
+    /**
+     * Метод получения всех продуктов из БД
+     * @return
+     */
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }

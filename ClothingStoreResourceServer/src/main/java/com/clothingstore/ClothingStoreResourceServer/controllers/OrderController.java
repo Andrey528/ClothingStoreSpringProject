@@ -3,6 +3,7 @@ package com.clothingstore.ClothingStoreResourceServer.controllers;
 import com.clothingstore.ClothingStoreResourceServer.models.Order;
 import com.clothingstore.ClothingStoreResourceServer.models.Product;
 import com.clothingstore.ClothingStoreResourceServer.models.ProductInOrderDetails;
+import com.clothingstore.ClothingStoreResourceServer.services.FacadeService;
 import com.clothingstore.ClothingStoreResourceServer.services.OrderService;
 import com.clothingstore.ClothingStoreResourceServer.services.ProductInOrderDetailsService;
 import com.clothingstore.ClothingStoreResourceServer.services.ProductService;
@@ -25,11 +26,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:8080")
 public class OrderController {
     @Autowired
-    private final OrderService orderService;
-    @Autowired
-    private final ProductService productService;
-    @Autowired
-    private final ProductInOrderDetailsService productInOrderDetailsService;
+    private final FacadeService facadeService;
 
     @Counted(value = "createOrder.count", description = "Counts how many orders are created")
     @PostMapping
@@ -48,7 +45,7 @@ public class OrderController {
         // Создаем экземпляр order и помещаем пока что только имя пользователя
         Order order = new Order();
         order.setCustomerUsername(customerUsername);
-        orderService.saveOrder(order);
+        facadeService.saveOrder(order);
 
         // Извлекаем из map id продуктов и их количество, помещаем в лист ProductInOrderDetails,
         // который привязан к order и хранит в себе: ссылку на order, ссылку на product, количество заказанного товара
@@ -56,21 +53,21 @@ public class OrderController {
         productsOrderAmount.forEach((key, value) -> {
             ProductInOrderDetails details = new ProductInOrderDetails(
                     order,
-                    productService.getProductById(key),
+                    facadeService.getProductById(key),
                     value
             );
             productInOrderDetails.add(details);
             System.out.println(details.toString());
-            productInOrderDetailsService.saveProductInOrderDetails(details);
+            facadeService.saveProductInOrderDetails(details);
         });
 
         // Связываем order с множеством ProductInOrderDetails
         order.setProductInOrderDetails(productInOrderDetails);
 
-        orderService.saveOrder(order);
+        facadeService.saveOrder(order);
 
         // Запускаем процесс оплаты
-        orderService.startOrderPayment(order);
+        facadeService.startOrderPayment(order);
 
         return ResponseEntity.ok().build();
     }
